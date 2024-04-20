@@ -30,6 +30,24 @@ class DataService {
         }
     }
 
+    public async getAllPosts(){
+        try{
+            const result=await PostModel.find({},'__v');
+            return result;
+        }catch (error){
+            console.error('Error occurred while retrieving all posts:', error);
+            throw new Error('Error occurred while retrieving all posts');
+        }
+    }
+    public async deleteAllData(): Promise<void> {
+        try {
+            await PostModel.deleteMany({});
+        } catch (error) {
+            console.error('Error occurred while deleting data:', error);
+            throw new Error('Error occurred while deleting data');
+        }
+    }
+
 
 }
 export default DataService;
