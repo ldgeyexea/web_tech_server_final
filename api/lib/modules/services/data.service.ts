@@ -1,6 +1,8 @@
 import {IData, Query} from "../models/data.model";
 import PostModel from '../schemas/data.schema';
 
+
+
 class DataService {
     public async createPost(postParams: IData) {
         try {

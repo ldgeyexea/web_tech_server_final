@@ -1,6 +1,6 @@
 import Controller from "../interfaces/controller.interface";
 import {NextFunction, Request, response, Response, Router} from "express";
-import {array} from "joi";
+import Joi, {array} from "joi";
 import {checkPostCount} from "../middlewares/checkPostCount.middleware";
 import DataService from "../modules/services/data.service";
 import dataService from "../modules/services/data.service";
@@ -43,15 +43,16 @@ class PostController implements Controller {
     private addData = async (request: Request, response: Response, next: NextFunction) => {
         const {title, text, image} = request.body;
 
-        const readingData = {
-            title,
-            text,
-            image
-        };
+        const readingData =Joi.object( {
+            title:Joi.string().required(),
+            text:Joi.string().required(),
+            image:Joi.string().uri().required()
+        });
 
         try {
-            await this.dataService.createPost(readingData);
-            response.status(200).json(readingData);
+            const validatedData=await readingData.validateAsync({title,text,image});
+            await this.dataService.createPost(validatedData);
+            response.status(200).json(validatedData);
         } catch (error) {
             console.log('eeee', error)
 
