@@ -34,7 +34,7 @@ class DataService {
 
     public async getAllPosts(){
         try{
-            const result=await PostModel.find({},'__v');
+            const result=await PostModel.find();
             return result;
         }catch (error){
             console.error('Error occurred while retrieving all posts:', error);

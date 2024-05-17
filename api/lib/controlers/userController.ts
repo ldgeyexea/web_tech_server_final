@@ -28,9 +28,7 @@ class UserController implements Controller{
 
         try {
             const user = await this.userService.getByEmailOrName(login);
-            if (!user) {
-                response.status(401).json({error: 'Unauthorized'});
-            }
+
             await this.passwordService.authorize(user.id, await this.passwordService.hashPassword(password));
             const token = await this.tokenService.create(user);
             response.status(200).json(this.tokenService.getToken(token));
