@@ -1,0 +1,25 @@
+<div class="container" style="margin-top:50px">
+  <form action="post" autocomplete="off" method="POST">
+    <div class="input-group">
+      <input [(ngModel)]="post.title" type="text" class="form-control"
+             name="title" placeholder="You're posts title " title="Title">
+    </div>
+
+    <div class="input-group">
+   <textarea [(ngModel)]="post.text" class="form-control"
+             name="text" placeholder="Your post's text" title="Text"></textarea>
+    </div>
+    <div class="input-group">
+      <input [(ngModel)]="post.img" type="text" class="form-control"
+             name="img" placeholder="Your post's img" title="img">
+    </div>
+
+
+    <button (click)="sendPost(this.post.title,this.post.text,this.post.img)" class="btn btn-primary" type="submit" title="send">
+      Send
+    </button>
+    <button (click)="resetForm()" class="btn btn-danger" type="submit" title="send">
+     reset
+    </button>
+  </form>
+</div>
